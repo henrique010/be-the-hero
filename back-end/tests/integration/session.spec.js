@@ -1,10 +1,10 @@
-const request = require('supertest');
 const app = require('../../src/app');
+const request = require('supertest');
 const connection = require('../../src/database/connection');
 
 const generateUniqueId = require('../../src/utils/generateUniqueId');
 
-describe('ONG', () => {
+describe('SESSION', () => {
     beforeEach(async () => {
         await connection.migrate.rollback();
         await connection.migrate.latest();
@@ -13,22 +13,8 @@ describe('ONG', () => {
     afterAll(async () => {
         await connection.destroy();
     });
-    it('Should be able to create new ONG', async () => {
-        const response = await request(app)
-        .post('/ongs')
-        .send({
-            name: "Ordem S.S.U",
-            email: "ordem@gmail.com",
-            whatsapp: "88998989796",
-            city: "Crateús",
-            uf: "CE"
-        });
 
-        expect(response.body).toHaveProperty('id');
-        expect(response.body.id).toHaveLength(8);
-    });
-
-    it('Should be able seek incidents of the ONG', async () => {
+    it('Should be able return ONG name for authentication success', async () => {
         const id = generateUniqueId();
         await connection('ongs')
         .insert({
@@ -41,9 +27,12 @@ describe('ONG', () => {
         });
 
         const response = await request(app)
-        .get('/profile')
-        .set('Authorization', id);
+        .post('/sessions')
+        .send({
+            id,
+        });
 
         expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty('name');
     })
-});
+})
