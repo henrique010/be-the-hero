@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiLogIn} from 'react-icons/fi';
 
 import api from '../../services/api';
 
+import Button from '../../components/Button';
+import BackLink from '../../components/BackLink';
+
 import heroesImg from '../../assets/heroes.png';
 import logoImg from '../../assets/logo.svg';
 
-import './styles.css';
+import { Container } from './styles';
 
 export default function Logon() {
-  const[id, setId] = useState('');
+  const [id, setId] = useState('');
   const history = useHistory();
 
   async function handleLogin(event){
@@ -28,8 +31,8 @@ export default function Logon() {
     }
   }
   return (
-    <div className="logon-container">
-        <section className="form">
+    <Container>
+        <section>
             <img src={logoImg} alt=""/>
 
             <form onSubmit={handleLogin}>
@@ -40,16 +43,16 @@ export default function Logon() {
                 value={id}
                 onChange={e => setId(e.target.value)}
                 />
-                <button className="button" type="submit">Entrar</button>
+                <Button>Entrar</Button>
 
-                <Link className="back-link" to="/register">
+                <BackLink to="/register">
                     <FiLogIn size={16} color="#E02041"/>
                     Não tenho cadastro
-                </Link>
+                </BackLink>
             </form>
         </section>
 
         <img src={heroesImg} alt=""/>
-    </div>
+    </Container>
   );
 }

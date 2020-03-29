@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
+
+import BackLink from '../../components/BackLink';
 
 import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
-import './styles.css';
+import { Container, IncidentList } from './styles';
 
 export default function Profile() {
     const [incidents, setIncidents] = useState([]);
@@ -46,12 +48,12 @@ export default function Profile() {
     }
 
     return (
-    <div className="profile-container">
+    <Container className="profile-container">
         <header>
             <img src={logoImg} alt=""/>
             <span>Bem Vinda, {ongName}</span>
 
-            <Link className="button" to="/incidents/new">Cadastrar novo caso</Link>
+            <BackLink button={true} to="/incidents/new">Cadastrar novo caso</BackLink>
             <button onClick={handleLogout} type="button">
                 <FiPower size={16} color="#E02041"/>
             </button>
@@ -59,7 +61,7 @@ export default function Profile() {
 
         <h1>Casos cadastrados</h1>
 
-        <ul>
+        <IncidentList>
             {incidents.map(incident => (
                 <li key={incident.id}>
                     <strong>CASO:</strong>
@@ -76,7 +78,7 @@ export default function Profile() {
                     </button>
                 </li>
             ))}
-        </ul>
-    </div>
+        </IncidentList>
+    </Container>
     );
 }

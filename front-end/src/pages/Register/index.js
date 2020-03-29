@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiArrowLeft} from 'react-icons/fi';
+
+import Button from '../../components/Button';
+import BackLink from '../../components/BackLink';
 
 import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
-import './styles.css';
+import { Container, Content} from './styles';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -14,8 +17,22 @@ export default function Register() {
   const [whatsapp, setWhatsapp] = useState('');
   const [city, setCity] = useState('');
   const [uf, setUf] = useState('');
+  const [cep, setCep] = useState('');
 
   const history = useHistory();
+
+  async function handleAndress(){
+    try {
+      const response = await api.get('address', {
+        params: { cep }
+      });
+
+      setCity(response.data.city);
+      setUf(response.data.uf);
+    } catch (error) {
+      console.log('CEP INVÁLIDO');
+    }
+  }
 
   async function handleRegister(event){
     event.preventDefault();
@@ -39,18 +56,18 @@ export default function Register() {
     }
   }
   return (
-      <div className="register-container">
-          <div className="content">
+      <Container className="register-container">
+          <Content className="content">
               <section>
                   <img src={logoImg} alt=""/>
 
                   <h1>Cadastro</h1>
                   <p>Faça seu cadastro, entre na plataforma e ajude pessoas a encontrarem os casos da sua ONG.</p>
 
-                  <Link className="back-link" to="/">
+                  <BackLink className="back-link" to="/">
                     <FiArrowLeft size={16} color="#E02041"/>
-                    Não tenho cadastro
-                </Link>
+                    Voltar para a tela de logon
+                  </BackLink>
               </section>
 
               <form onSubmit={handleRegister}>
@@ -70,6 +87,13 @@ export default function Register() {
                     value={whatsapp}
                     onChange={e => setWhatsapp(e.target.value)}
                   />
+                  <input 
+                    maxLength={8}
+                    placeholder="CEP" 
+                    value={cep}
+                    onChange={e => setCep(e.target.value)}
+                    onKeyUp={handleAndress}
+                  />
 
                   <div className="input-group">
                     <input 
@@ -84,9 +108,9 @@ export default function Register() {
                       style={{ width: 80}}/>
                   </div>
 
-                  <button className="button">Cadastrar</button>
+                  <Button>Cadastrar</Button>
               </form>
-          </div>
-      </div>
+          </Content>
+      </Container>
   );
 }
