@@ -22,7 +22,7 @@ function App() {
   return (
     <ThemeProvider theme={theme === 'ligth' ? ligthTheme : darkTheme}>
       <>
-        <ToggleButton toggleTheme={toggleTheme}/>
+        <ToggleButton toggleTheme={toggleTheme} theme={theme}/>
         <GlobalStyle />
         <Routes />
       </>

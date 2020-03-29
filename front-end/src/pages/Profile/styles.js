@@ -49,7 +49,7 @@ export const IncidentList = styled.ul`
     list-style: none;
 
     li {
-        background: #FFF;
+        background: ${({ theme }) => theme.backgroundIncident};
         padding: 24px;
         border-radius: 8px;
         position: relative;
@@ -69,7 +69,7 @@ export const IncidentList = styled.ul`
         strong {
             display: block;
             margin-bottom: 16px;
-            color: #41414d;
+            color: ${({ theme }) => theme.titleProperty};
         }
 
         p {
