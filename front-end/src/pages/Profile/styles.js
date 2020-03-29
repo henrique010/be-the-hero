@@ -9,6 +9,7 @@ export const Container = styled.div`
     h1 {
         margin-top: 80px;
         margin-bottom: 24px;
+        color: ${({ theme }) => theme.text};
     }
 
     header {
@@ -18,6 +19,7 @@ export const Container = styled.div`
         span {
             font-size: 20px;
             margin-left: 24px;
+            color: ${({ theme }) => theme.text};
         }
 
         img { height: 64px; }
@@ -31,7 +33,7 @@ export const Container = styled.div`
         button {
             height: 60px;
             width: 60px;
-            border: 1px solid #dcdce6;
+            border: 1px solid ${({ theme }) => theme.toggleBorder};
             background: transparent;
             margin-left: 16px;
             transition: border-color 0.2s;

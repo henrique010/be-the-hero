@@ -14,7 +14,7 @@ export const Container = styled.div`
 export const Content = styled.div`
     width: 100%;
     padding: 95px;
-    background: #f0f0f5;
+    background: ${({ theme }) => theme.backgroundContent};
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 
@@ -29,6 +29,7 @@ export const Content = styled.div`
         h1 {
             margin: 64px 0 32px;
             font-size: 32px;
+            color: ${({ theme }) => theme.text}
         }
 
         p {
