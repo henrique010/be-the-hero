@@ -17,8 +17,8 @@ describe('ONG', () => {
         const response = await request(app)
         .post('/ongs')
         .send({
-            name: "Ordem S.S.U",
-            email: "ordem@gmail.com",
+            name: "ONG TESTE",
+            email: "teste@gmail.com",
             whatsapp: "88998989796",
             city: "Crateús",
             uf: "CE"

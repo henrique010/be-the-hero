@@ -5,7 +5,9 @@ const OngController = require('./controllers/OngController');
 const IncidentController = require('./controllers/IncidentController');
 const ProfileController = require('./controllers/ProfileController');
 const SessionController = require('./controllers/SessionController');
+const AdressController = require('./controllers/AddressController');
 
+const AddressSchemaValidator = require('./validators/schemas/AddressSchemaValidator');
 const CreateSessionSchema = require('./validators/schemas/SessionSchemaValidator');
 const { CreateOngSchema, OngProfileSchema } = require('./validators/schemas/OngSchemaValidator');
 const { 
@@ -24,5 +26,7 @@ routes.get('/profile', celebrate(OngProfileSchema), ProfileController.index);
 routes.post('/incidents', celebrate(CreateIncidentSchema), IncidentController.create);
 routes.get('/incidents', celebrate(ListIncindetSchema), IncidentController.index);
 routes.delete('/incidents/:id', celebrate(DeleteIncidentSchema), IncidentController.delete);
+
+routes.get('/address', celebrate(AddressSchemaValidator), AdressController.show);
 
 module.exports = routes;
