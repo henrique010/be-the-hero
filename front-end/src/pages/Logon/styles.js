@@ -21,6 +21,7 @@ export const Container = styled.div`
             h1 {
                 font-size: 32px;
                 margin-bottom: 32px;
+                color: ${({ theme }) => theme.text}
             }
         }
     }

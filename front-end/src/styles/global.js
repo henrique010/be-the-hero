@@ -12,7 +12,7 @@ export default createGlobalStyle`
 
     body {
         font: 400 14px Roboto, sans-serif;
-        background: #f0f0f5;
+        background: ${({ theme }) => theme.body};
         -webkit-font-smoothing: antialiased;
     }
 
@@ -27,33 +27,22 @@ export default createGlobalStyle`
     form input {
         width: 100%;
         height: 60px;
-        color: #333;
-        border: 1px solid #dcdce6;
+        color: ${({ theme }) => theme.text};
+        border: 1px solid ${({ theme }) => theme.toggleBorder};
         border-radius: 8px;
         padding: 0 24px;
+        background: ${({ theme }) => theme.backgroundInput}
     }
 
     form textarea {
         width: 100%;
         resize: vertical;
         min-height: 140px;
-        color: #333;
-        border: 1px solid #dcdce6;
+        color: ${({ theme }) => theme.text};
+        border: 1px solid ${({ theme }) => theme.toggleBorder};
         border-radius: 8px;
         padding: 16px 24px;
         line-height: 24px;
+        background: ${({ theme }) => theme.backgroundInput}
     }
-/* 
-    .back-link {
-        
-    }
-
-    .back-link svg {
-       
-    }
-
-    .back-link:hover {
-        
-    } */
-
 `
